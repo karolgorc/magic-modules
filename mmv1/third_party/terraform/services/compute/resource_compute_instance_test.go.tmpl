@@ -3819,7 +3819,6 @@ func TestAccComputeInstance_keyRevocationActionType(t *testing.T) {
 	})
 }
 
-{{ if ne $.TargetVersionName `ga` -}}
 const errorDeleteAccessConfigWithSecPolicy = "Cannot delete an access config with a security policy set. Please remove the security policy first"
 
 // The tests related to security_policy use network_edge_security_service resource
@@ -4146,7 +4145,6 @@ func testAccComputeInstance_nic_securityPolicyCreateWithoutAccessConfig(t *testi
 	})
 }
 
-{{ end }}
 
 func testAccCheckComputeInstanceUpdateMachineType(t *testing.T, n string) resource.TestCheckFunc {
 	return func(s *terraform.State) error {
@@ -5117,7 +5115,6 @@ func testAccCheckComputeInstanceHasStatus(instance *compute.Instance, status str
 	}
 }
 
-{{ if ne $.TargetVersionName `ga` -}}
 func testAccCheckComputeInstanceNicAccessConfigHasSecurityPolicy(instance *compute.Instance, securityPolicy string) resource.TestCheckFunc {
 	return func(s *terraform.State) error {
 		for _, networkInterface := range instance.NetworkInterfaces {
@@ -5158,7 +5155,6 @@ func testAccCheckComputeInstanceNicAccessConfigHasNoSecurityPolicy(instance *com
 		return nil
 	}
 }
-{{- end }}
 
 func testAccComputeInstance_basic(instance string) string {
 	return fmt.Sprintf(`
@@ -10203,7 +10199,6 @@ resource "google_compute_disk" "debian" {
 `, instance, diskName, suffix, suffix, suffix)
 }
 
-{{ if ne $.TargetVersionName `ga` -}}
 func testAccComputeInstance_nic_securityPolicyCreateWithOneNicAndTwoAccessConfigs(suffix, policy, instance string) string {
 	return fmt.Sprintf(`
 data "google_compute_image" "my_image" {
@@ -10999,8 +10994,6 @@ resource "google_compute_instance" "foobar" {
 }
 `, suffix, suffix, suffix, suffix, suffix, suffix, suffix, policy, instance)
 }
-
-{{ end }}
 
 {{ if ne $.TargetVersionName `ga` -}}
 func testAccComputeInstance_networkAttachment(context map[string]interface{}) string {
